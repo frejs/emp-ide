@@ -2,19 +2,21 @@
   <div class="wrapper">
     <headerbar-view></headerbar-view>
     <simulator-view></simulator-view>
+    <sidebar-view></sidebar-view>
     <editor-view></editor-view>
     <devtools-View></devtools-view>
   </div>
 </template>
 
 <script>
-import HeaderbarView from '../components/HeaderbarView';
-import SimulatorView from '../components/SimulatorView';
-import EditorView from '../components/EditorView';
-import DevtoolsView from '../components/DevToolsView';
+import HeaderbarView from './parts/HeaderbarView';
+import SimulatorView from './parts/SimulatorView';
+import SidebarView from './parts/SidebarView';
+import EditorView from './parts/EditorView';
+import DevtoolsView from './parts/DevToolsView';
 export default {
   name: 'landing-page',
-  components: { HeaderbarView, SimulatorView, EditorView, DevtoolsView },
+  components: { HeaderbarView, SimulatorView, SidebarView, EditorView, DevtoolsView },
   mounted() {
     const simulatorView = document.getElementById('simulator');
     const devtoolsView = document.getElementById('devtools');

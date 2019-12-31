@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import MonacoEditor from './MonacoEditor';
+import MonacoEditor from '@/components/MonacoEditor';
 export default {
   name: 'editor-view',
   data() {
@@ -75,7 +75,7 @@ Page({
 <style lang="less">
 .editor-wrapper {
   position: absolute;
-  left: 400px;
+  left: 650px;
   right: 0;
   top: 71px;
   bottom: 300px;
