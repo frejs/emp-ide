@@ -37,22 +37,20 @@ export default {
 
 <style lang="less">
 .header-wrapper {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
+  width: 100%;
   height: 70px;
   font-size: 30px;
   line-height: 70px;
   display: flex;
   justify-content: space-between;
   background-color: #282c35;
+  box-shadow: 0 0 0 1px #000;
   .user-info {
     .avatar {
-        display: inline-block;
-        width: 40px;
-        height: 40px;
-        margin: 15px;
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      margin: 15px;
     }
   }
   .action-item-list {
