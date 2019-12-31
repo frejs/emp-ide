@@ -16,6 +16,11 @@ module.exports = {
     'html'
   ],
   'rules': {
+    "space-before-function-paren": 0,
+    // 强制分号
+    "semi": ["error", "always"],
+    // 强制单引号
+    "quotes": ["error", "single"],
     // allow paren-less arrow functions
     'arrow-parens': 0,
     // allow async-await

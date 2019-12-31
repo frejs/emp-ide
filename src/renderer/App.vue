@@ -5,11 +5,19 @@
 </template>
 
 <script>
-  export default {
-    name: 'emp-ide'
-  }
+export default {
+  name: 'emp-ide'
+};
 </script>
 
 <style>
-  /* CSS */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  font-family: "PingFangSC-Regular", "Microsoft YaHei";
+}
 </style>
