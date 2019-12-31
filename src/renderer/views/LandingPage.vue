@@ -2,16 +2,19 @@
   <div class="wrapper">
     <headerbar-view></headerbar-view>
     <simulator-view></simulator-view>
-    <webview class="devtools" id="devtools"></webview>
+    <editor-view></editor-view>
+    <devtools-View></devtools-view>
   </div>
 </template>
 
 <script>
 import HeaderbarView from '../components/HeaderbarView';
 import SimulatorView from '../components/SimulatorView';
+import EditorView from '../components/EditorView';
+import DevtoolsView from '../components/DevToolsView';
 export default {
   name: 'landing-page',
-  components: { HeaderbarView, SimulatorView },
+  components: { HeaderbarView, SimulatorView, EditorView, DevtoolsView },
   mounted() {
     const simulatorView = document.getElementById('simulator');
     const devtoolsView = document.getElementById('devtools');
@@ -31,12 +34,5 @@ export default {
   margin: 0;
   padding: 0;
   background-color: #edece8;
-  .devtools {
-    position: absolute;
-    top: 70px;
-    right: 0;
-    bottom: 0;
-    left: 400px;
-  }
 }
 </style>
