@@ -1,5 +1,5 @@
 <template>
-  <div :id="id">
+  <div :id="id" class="tree">
     <ul :style="styles.tree" v-if="force">
       <template v-for="node in nodes">
         <tree-row
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+// https://github.com/scalia/vuejs-tree
 import TreeRow from './TreeRow.vue';
 export default {
   name: 'tree',
@@ -351,3 +352,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.tree {
+  user-select: none;
+}
+</style>
