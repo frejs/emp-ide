@@ -1,6 +1,6 @@
 {
     "manifest_version": 2,
-    "name": "devtools-ext",
+    "name": "dev-ext",
     "version": "0.0.1",
     "description": "Chrome 开发者工具拓展",
     "icons": {
@@ -10,19 +10,12 @@
         "128": "icons/icon_128.png"
     },
     "devtools_page": "devtools.html",
-    "options_page": "options.html",
-    "browser_action": {
-        "default_popup": "popup.html"
-    },
     "background": {
         "scripts": [
             "js/background.js"
         ]
     },
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
-    "web_accessible_resources": [
-        "fonts/*"
-    ],
     "permissions": [
         "http://*/*",
         "https://*/*",

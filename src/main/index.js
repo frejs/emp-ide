@@ -34,7 +34,7 @@ function createWindow () {
     mainWindow = null;
   });
 
-  BrowserWindow.addDevToolsExtension(path.join(process.cwd(), 'extensions/ext-test'));
+  BrowserWindow.addDevToolsExtension(path.join(process.cwd(), 'extensions/dev-ext'));
 }
 
 app.on('ready', createWindow);
