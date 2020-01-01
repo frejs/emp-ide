@@ -5,8 +5,16 @@
 </template>
 
 <script>
+// const path = require('path');
 export default {
-  name: 'devtools-view'
+  name: 'devtools-view',
+  mounted() {
+    // const devtoolsView = document.getElementById('devtools');
+    // devtoolsView.addEventListener('dom-ready', () => {
+    //   const rootDir = process.cwd();
+    //   devtoolsView.getWebContents().addDevToolsExtension(path.join(rootDir, 'src/plugins/ext-test'));
+    // });
+  }
 };
 </script>
 

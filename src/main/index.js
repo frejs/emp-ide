@@ -1,6 +1,7 @@
 'use strict';
 
 import { app, BrowserWindow, screen } from 'electron';
+const path = require('path');
 
 /**
  * Set `__static` path to static files in production
@@ -32,6 +33,8 @@ function createWindow () {
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
+
+  BrowserWindow.addDevToolsExtension(path.join(process.cwd(), 'extensions/ext-test'));
 }
 
 app.on('ready', createWindow);

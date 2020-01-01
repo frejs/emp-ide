@@ -14,6 +14,7 @@ import SimulatorView from './parts/SimulatorView';
 import SidebarView from './parts/SidebarView';
 import EditorView from './parts/EditorView';
 import DevtoolsView from './parts/DevToolsView';
+
 export default {
   name: 'landing-page',
   components: { HeaderbarView, SimulatorView, SidebarView, EditorView, DevtoolsView },
@@ -21,9 +22,9 @@ export default {
     const simulatorView = document.getElementById('simulator');
     const devtoolsView = document.getElementById('devtools');
     simulatorView.addEventListener('dom-ready', () => {
-      const browser = simulatorView.getWebContents();
-      browser.setDevToolsWebContents(devtoolsView.getWebContents());
-      browser.openDevTools();
+      const simulator = simulatorView.getWebContents();
+      simulator.setDevToolsWebContents(devtoolsView.getWebContents());
+      simulator.openDevTools();
     });
   }
 };
