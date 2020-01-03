@@ -11,8 +11,9 @@ export default new Router({
       component: require('@/views/LandingPage').default
     },
     {
-      path: '*',
-      redirect: '/'
+      path: '/workbench',
+      name: 'workbench-page',
+      component: require('@/views/WorkbenchPage').default
     }
   ]
 });

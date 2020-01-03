@@ -1,6 +1,6 @@
 'use strict';
 
-import { app, BrowserWindow, screen } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 const path = require('path');
 
 /**
@@ -17,14 +17,12 @@ const winURL = process.env.NODE_ENV === 'development'
   : `file://${__dirname}/index.html`;
 
 function createWindow () {
-  let size = screen.getPrimaryDisplay().workAreaSize;
-
   /**
    * Initial window options
    */
   mainWindow = new BrowserWindow({
-    width: size.width,
-    height: size.height,
+    width: 800,
+    height: 600,
     useContentSize: true
   });
 
@@ -34,6 +32,7 @@ function createWindow () {
     mainWindow = null;
   });
 
+  // 添加 Chrome 拓展
   BrowserWindow.addDevToolsExtension(path.join(process.cwd(), 'extensions/dev-ext'));
 }
 
@@ -49,6 +48,12 @@ app.on('activate', () => {
   if (mainWindow === null) {
     createWindow();
   }
+});
+
+ipcMain.on('window-max', () => {
+  // mainWindow
+  // let size = screen.getPrimaryDisplay().workAreaSize;
+  mainWindow.maximize();
 });
 
 /**

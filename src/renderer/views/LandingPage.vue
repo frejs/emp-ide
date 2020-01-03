@@ -1,31 +1,22 @@
 <template>
   <div class="wrapper">
-    <headerbar-view></headerbar-view>
-    <simulator-view></simulator-view>
-    <sidebar-view></sidebar-view>
-    <editor-view></editor-view>
-    <devtools-View></devtools-view>
+    <button @click="openWorkbenchPage">打开 Workbench</button>
   </div>
 </template>
 
 <script>
-import HeaderbarView from './parts/HeaderbarView';
-import SimulatorView from './parts/SimulatorView';
-import SidebarView from './parts/SidebarView';
-import EditorView from './parts/EditorView';
-import DevtoolsView from './parts/DevToolsView';
+const { ipcRenderer } = require('electron');
 
 export default {
   name: 'landing-page',
-  components: { HeaderbarView, SimulatorView, SidebarView, EditorView, DevtoolsView },
+  components: {},
   mounted() {
-    const simulatorView = document.getElementById('simulator');
-    const devtoolsView = document.getElementById('devtools');
-    simulatorView.addEventListener('dom-ready', () => {
-      const simulator = simulatorView.getWebContents();
-      simulator.setDevToolsWebContents(devtoolsView.getWebContents());
-      simulator.openDevTools();
-    });
+  },
+  methods: {
+    openWorkbenchPage() {
+      ipcRenderer.send('window-max');
+      this.$router.push('/workbench');
+    }
   }
 };
 </script>
