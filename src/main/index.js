@@ -22,8 +22,10 @@ function createWindow () {
    */
   mainWindow = new BrowserWindow({
     width: 800,
-    height: 600,
-    useContentSize: true
+    height: 500,
+    useContentSize: false,
+    resizable: false,
+    titleBarStyle: 'hidden'
   });
 
   mainWindow.loadURL(winURL);
@@ -53,6 +55,7 @@ app.on('activate', () => {
 ipcMain.on('window-max', () => {
   // mainWindow
   // let size = screen.getPrimaryDisplay().workAreaSize;
+  mainWindow.setResizable(true);
   mainWindow.maximize();
 });
 
