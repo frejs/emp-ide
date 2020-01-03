@@ -3,7 +3,8 @@
 </template>
 
 <script>
-import * as monaco from 'monaco-editor/esm/vs/editor/editor.main';
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
+
 export default {
   props: {
     value: {
@@ -38,6 +39,9 @@ export default {
   methods: {
     updateValue() {
       this.$emit('input', this.$editor.getValue());
+    },
+    updateDimensions() {
+      this.$editor.layout();
     }
   },
   created() {
@@ -52,6 +56,12 @@ export default {
       editor.onMouseUp(() => this.updateValue());
       this.$editor = editor;
     });
+  },
+  mounted() {
+    window.addEventListener('resize', this.updateDimensions.bind(this));
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.updateDimensions.bind(this));
   }
 };
 </script>
