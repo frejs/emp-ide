@@ -1,20 +1,12 @@
 <template>
-  <div class="devtools-wrapper">
-    <webview class="devtools" id="devtools"></webview>
+  <div class="devtools-wrapper" ref="devtoolsWrapper">
+    <webview class="devtools" id="devtools" preload="file:///Users/zhaomenghuan/research/miniprogram/emp-ide/src/renderer/views/parts/devtools-preload.js"></webview>
   </div>
 </template>
 
 <script>
-// const path = require('path');
 export default {
-  name: 'devtools-view',
-  mounted() {
-    // const devtoolsView = document.getElementById('devtools');
-    // devtoolsView.addEventListener('dom-ready', () => {
-    //   const rootDir = process.cwd();
-    //   devtoolsView.getWebContents().addDevToolsExtension(path.join(rootDir, 'src/plugins/ext-test'));
-    // });
-  }
+  name: 'devtools-view'
 };
 </script>
 

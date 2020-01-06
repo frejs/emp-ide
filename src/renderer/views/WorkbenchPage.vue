@@ -21,10 +21,23 @@ export default {
   mounted() {
     const simulatorView = document.getElementById('simulator');
     const devtoolsView = document.getElementById('devtools');
+    const baseUrl = 'http://127.0.0.1:8090';
     simulatorView.addEventListener('dom-ready', () => {
-      const simulator = simulatorView.getWebContents();
-      simulator.setDevToolsWebContents(devtoolsView.getWebContents());
-      simulator.openDevTools();
+      fetch(`${baseUrl}/json`)
+        .then(res => res.json())
+        .then(res => {
+          const target = res.find(child => child.type === 'webview' && child.url === simulatorView.src);
+          if (target) {
+            devtoolsView.setAttribute('src', `${baseUrl}${target.devtoolsFrontendUrl}`);
+            const simulatorContents = simulatorView.getWebContents();
+            const devtoolsContents = devtoolsView.getWebContents();
+            simulatorContents.setDevToolsWebContents(devtoolsContents);
+            simulatorContents.debugger.attach();
+            simulatorContents.openDevTools({
+              mode: 'detach'
+            });
+          }
+        });
     });
   }
 };

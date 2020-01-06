@@ -25,7 +25,10 @@ function createWindow () {
     height: 500,
     useContentSize: false,
     resizable: false,
-    titleBarStyle: 'hidden'
+    titleBarStyle: 'hidden',
+    webPreferences: {
+      webSecurity: false
+    }
   });
 
   mainWindow.loadURL(winURL);
@@ -38,6 +41,7 @@ function createWindow () {
   BrowserWindow.addDevToolsExtension(path.join(process.cwd(), 'extensions/dev-ext'));
 }
 
+app.commandLine.appendSwitch('remote-debugging-port', '8090');
 app.on('ready', createWindow);
 
 app.on('window-all-closed', () => {
