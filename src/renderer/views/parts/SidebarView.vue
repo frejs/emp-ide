@@ -14,12 +14,14 @@
 import Tree from '@/components/Tree';
 const { remote } = require('electron');
 const { Menu, MenuItem } = remote;
+const fs = require('fs');
 
 export default {
   name: 'sidebar-view',
   components: { Tree },
   data() {
     return {
+      workbenchDir: '',
       treeDisplayData: [
         {
           text: 'Root 1',
@@ -121,6 +123,13 @@ export default {
     }
   },
   mounted() {
+    const workbenchDir = this.$route.query.files;
+    if (workbenchDir) {
+      const dirObject = fs.readdirSync(workbenchDir, {
+        withFileTypes: true
+      });
+      console.log(dirObject);
+    }
     window.addEventListener('contextmenu', (e) => {
       if (e.target.className === 'capitalize') {
         e.preventDefault();

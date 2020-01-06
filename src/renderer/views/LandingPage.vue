@@ -33,6 +33,7 @@
 
 <script>
 const { ipcRenderer } = require('electron');
+const { dialog } = require('electron').remote;
 
 export default {
   name: 'landing-page',
@@ -61,8 +62,19 @@ export default {
   },
   methods: {
     openWorkbenchPage() {
-      ipcRenderer.send('window-max');
-      this.$router.push('/workbench');
+      dialog.showOpenDialog({
+        properties: ['openDirectory']
+      }, (files) => {
+        if (files) {
+          ipcRenderer.send('window-max');
+          this.$router.push({
+            name: 'workbench-page',
+            query: {
+              files
+            }
+          });
+        }
+      });
     }
   }
 };

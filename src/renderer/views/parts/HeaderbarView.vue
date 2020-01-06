@@ -61,6 +61,7 @@ export default {
       flex: 1;
       width: 60px;
       height: 60px;
+      cursor: pointer;
       .icon {
         width: 40px;
         margin: 10px auto 5px;
