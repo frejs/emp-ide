@@ -1,6 +1,6 @@
 <template>
   <div class="devtools-wrapper" ref="devtoolsWrapper">
-    <webview class="devtools" id="devtools" preload="file:///Users/zhaomenghuan/research/miniprogram/emp-ide/src/renderer/views/parts/devtools-preload.js"></webview>
+    <webview class="devtools" id="devtools"></webview>
   </div>
 </template>
 

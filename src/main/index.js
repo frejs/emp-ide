@@ -2,6 +2,7 @@
 
 import { app, BrowserWindow, ipcMain } from 'electron';
 const path = require('path');
+const getPort = require('get-port');
 
 /**
  * Set `__static` path to static files in production
@@ -41,7 +42,14 @@ function createWindow () {
   BrowserWindow.addDevToolsExtension(path.join(process.cwd(), 'extensions/dev-ext'));
 }
 
-app.commandLine.appendSwitch('remote-debugging-port', '8090');
+(async () => {
+  const ip = '127.0.0.1';
+  const port = await getPort();
+  app.commandLine.appendSwitch('remote-debugging-port', `${port}`);
+  app.commandLine.appendSwitch('remote-debugging-address', `http://${ip}`);
+  process.env.EMP_REMOTE_DEBUGGING_PORT = port;
+})();
+
 app.on('ready', createWindow);
 
 app.on('window-all-closed', () => {

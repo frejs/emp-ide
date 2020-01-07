@@ -21,7 +21,8 @@ export default {
   mounted() {
     const simulatorView = document.getElementById('simulator');
     const devtoolsView = document.getElementById('devtools');
-    const baseUrl = 'http://127.0.0.1:8090';
+    const port = process.env.EMP_REMOTE_DEBUGGING_PORT;
+    const baseUrl = `http://127.0.0.1:${port}`;
     simulatorView.addEventListener('dom-ready', () => {
       fetch(`${baseUrl}/json`)
         .then(res => res.json())
@@ -32,7 +33,6 @@ export default {
             const simulatorContents = simulatorView.getWebContents();
             const devtoolsContents = devtoolsView.getWebContents();
             simulatorContents.setDevToolsWebContents(devtoolsContents);
-            simulatorContents.debugger.attach();
             simulatorContents.openDevTools({
               mode: 'detach'
             });
