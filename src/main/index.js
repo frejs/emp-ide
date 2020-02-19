@@ -48,6 +48,8 @@ function createWindow () {
   app.commandLine.appendSwitch('remote-debugging-port', `${port}`);
   app.commandLine.appendSwitch('remote-debugging-address', `http://${ip}`);
   process.env.EMP_REMOTE_DEBUGGING_PORT = port;
+  // 关闭安全警告
+  process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = true;
 })();
 
 app.on('ready', createWindow);
