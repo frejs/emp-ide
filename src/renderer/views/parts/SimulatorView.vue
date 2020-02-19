@@ -1,7 +1,10 @@
 <template>
   <div
     class="simulator-wrapper"
-    :style="{ width: `${mobileSimulator.width + 20}px` }"
+    :style="{
+      'min-width': `${simulatorConfig.width + 20}px`,
+      'width': `${simulatorConfig.width + 20}px`
+    }"
   >
     <div class="simulator-header">
       <select class="simulator-plugin-device-type" v-model="selectedDeviceTypeIndex">
@@ -24,7 +27,7 @@
         id="simulator"
         class="webview"
         src="https://zhaomenghuan.js.org"
-        :style="{ width: `${mobileSimulator.width}px`, height: `${mobileSimulator.height}px` }"
+        :style="{ width: `${simulatorConfig.width}px`, height: `${simulatorConfig.height}px` }"
       ></webview>
     </div>
     <div class="simulator-footer"></div>
@@ -85,30 +88,27 @@ export default {
         { label: '75%', value: 0.75 },
         { label: '50%', value: 0.5 }
       ],
-      mobileSimulator: {},
+      simulatorConfig: {},
       selectedDeviceTypeIndex: 0
     };
   },
   mounted() {
-    this.mobileSimulator = this.deviceTypeConfig[0];
+    this.simulatorConfig = this.deviceTypeConfig[0];
   },
   watch: {
     selectedDeviceTypeIndex() {
-      this.mobileSimulator = this.deviceTypeConfig[this.selectedDeviceTypeIndex];
+      this.simulatorConfig = this.deviceTypeConfig[this.selectedDeviceTypeIndex];
+    },
+    simulatorConfig() {
+      this.$emit('selected', {
+        width: this.simulatorConfig.width + 20
+      });
     }
   }
 };
 </script>
 
 <style>
-.simulator-wrapper {
-  position: absolute;
-  top: 71px;
-  left: 0;
-  bottom: 0;
-  min-width: 400px;
-}
-
 .simulator-header {
   position: absolute;
   width: 100%;
@@ -149,6 +149,5 @@ export default {
   bottom: 0;
   height: 35px;
   background: #252526;
-  box-shadow: 1px 0 1px #000;
 }
 </style>

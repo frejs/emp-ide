@@ -75,10 +75,8 @@ Page({
 <style lang="less">
 .editor-wrapper {
   position: absolute;
-  left: 650px;
-  right: 0;
-  top: 71px;
-  bottom: 300px;
+  left: 0;
+  width: 100%;
   .editor {
     width: 100%;
     height: 100%;

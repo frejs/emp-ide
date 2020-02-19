@@ -1,5 +1,6 @@
 <template>
   <div class="devtools-wrapper" ref="devtoolsWrapper">
+    <div class="tabbar">调试器</div>
     <webview class="devtools" id="devtools"></webview>
   </div>
 </template>
@@ -12,14 +13,18 @@ export default {
 
 <style lang="less">
 .devtools-wrapper {
-  position: absolute;
-  left: 400px;
-  right: 0;
-  bottom: 0;
   height: 300px;
+  .tabbar {
+    height: 30px;
+    padding-left: 5px;
+    font-size: 12px;
+    line-height: 30px;
+    color: hsla(0,0%,100%,.65);
+    background-color: #30303D;
+  }
   .devtools {
     width: 100%;
-    height: 100%;
+    height: 270px;
   }
 }
 </style>

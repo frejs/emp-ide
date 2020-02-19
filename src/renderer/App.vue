@@ -19,6 +19,6 @@ export default {
 html,
 body {
   font-family: "PingFangSC-Regular", "Microsoft YaHei";
-   -webkit-app-region: drag;
+  -webkit-app-region: drag;
 }
 </style>

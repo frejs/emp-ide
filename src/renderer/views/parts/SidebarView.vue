@@ -171,9 +171,7 @@ export default {
 <style lang="less">
 .sidebar-wrapper {
   position: absolute;
-  left: 400px;
-  top: 71px;
-  bottom: 300px;
+  left: 0;
   width: 250px;
   background-color: #23242f;
   .project-filelist {
