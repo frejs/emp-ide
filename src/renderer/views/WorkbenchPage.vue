@@ -27,6 +27,7 @@ import SimulatorView from './parts/SimulatorView';
 import SidebarView from './parts/SidebarView';
 import EditorView from './parts/EditorView';
 import DevtoolsView from './parts/DevToolsView';
+import { connectSimulatorDevTools } from '../utils/devtools';
 
 export default {
   name: 'workbench-page',
@@ -50,24 +51,7 @@ export default {
   mounted() {
     const simulatorView = document.getElementById('simulator');
     const devtoolsView = document.getElementById('devtools');
-    const port = process.env.EMP_REMOTE_DEBUGGING_PORT;
-    const baseUrl = `http://127.0.0.1:${port}`;
-    simulatorView.addEventListener('dom-ready', () => {
-      fetch(`${baseUrl}/json`)
-        .then(res => res.json())
-        .then(res => {
-          const target = res.find(child => child.type === 'webview' && child.url === simulatorView.src);
-          if (target) {
-            devtoolsView.setAttribute('src', `${baseUrl}${target.devtoolsFrontendUrl}`);
-            const simulatorContents = simulatorView.getWebContents();
-            const devtoolsContents = devtoolsView.getWebContents();
-            simulatorContents.setDevToolsWebContents(devtoolsContents);
-            simulatorContents.openDevTools({
-              mode: 'detach'
-            });
-          }
-        });
-    });
+    connectSimulatorDevTools(simulatorView, devtoolsView);
   },
   computed: {
     ideLayoutMainLeftParam() {

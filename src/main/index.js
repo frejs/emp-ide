@@ -39,14 +39,16 @@ function createWindow () {
   });
 
   // 添加 Chrome 拓展
-  BrowserWindow.addDevToolsExtension(path.join(process.cwd(), 'extensions/dev-ext'));
+  BrowserWindow.addExtension(path.join(process.cwd(), 'extensions/dev-ext'));
 }
 
 (async () => {
   const ip = '127.0.0.1';
   const port = await getPort();
+  // 远程调试
   app.commandLine.appendSwitch('remote-debugging-port', `${port}`);
   app.commandLine.appendSwitch('remote-debugging-address', `http://${ip}`);
+  // 远程调试端口
   process.env.EMP_REMOTE_DEBUGGING_PORT = port;
   // 关闭安全警告
   process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = true;

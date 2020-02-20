@@ -60,6 +60,12 @@ export default {
       currentProjectTypeIndex: 0
     };
   },
+  mounted() {
+    ipcRenderer.send('window-max');
+    this.$router.push({
+      name: 'workbench-page'
+    });
+  },
   methods: {
     openWorkbenchPage() {
       dialog.showOpenDialog({
