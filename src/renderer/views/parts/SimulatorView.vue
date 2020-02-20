@@ -26,7 +26,7 @@
       <webview
         id="simulator"
         class="webview"
-        src="https://zhaomenghuan.js.org"
+        src="http://localhost:8000"
         :style="{ width: `${simulatorConfig.width}px`, height: `${simulatorConfig.height}px` }"
       ></webview>
     </div>

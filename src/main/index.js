@@ -43,12 +43,9 @@ function createWindow () {
 }
 
 (async () => {
-  const ip = '127.0.0.1';
-  const port = await getPort();
   // 远程调试
+  const port = await getPort();
   app.commandLine.appendSwitch('remote-debugging-port', `${port}`);
-  app.commandLine.appendSwitch('remote-debugging-address', `http://${ip}`);
-  // 远程调试端口
   process.env.EMP_REMOTE_DEBUGGING_PORT = port;
   // 关闭安全警告
   process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = true;
@@ -69,8 +66,6 @@ app.on('activate', () => {
 });
 
 ipcMain.on('window-max', () => {
-  // mainWindow
-  // let size = screen.getPrimaryDisplay().workAreaSize;
   mainWindow.setResizable(true);
   mainWindow.maximize();
 });

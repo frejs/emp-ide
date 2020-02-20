@@ -1,7 +1,7 @@
 <template>
   <div class="devtools-wrapper" ref="devtoolsWrapper">
     <div class="tabbar">调试器</div>
-    <webview class="devtools" id="devtools"></webview>
+    <webview class="devtools" id="devtools" disablewebsecurity="true"></webview>
   </div>
 </template>
 
