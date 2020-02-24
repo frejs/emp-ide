@@ -1,6 +1,10 @@
 <template>
   <div class="editor-wrapper">
-    <monaco-editor class="editor" v-model="code"></monaco-editor>
+    <multipanel layout="vertical" >
+      <sidebar-view></sidebar-view>
+      <multipanel-resizer></multipanel-resizer>
+      <monaco-editor class="editor" v-model="code"></monaco-editor>
+    </multipanel>
   </div>
 </template>
 

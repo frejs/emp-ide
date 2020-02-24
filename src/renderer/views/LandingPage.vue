@@ -19,11 +19,11 @@
       <p class="description">{{projectTypeList[currentProjectTypeIndex].description}}</p>
       <div class="next-action-btns">
         <div class="btn" @click="openWorkbenchPage">
-          <img class="icon" src="~@/assets/icons/plus.svg" alt="" srcset="">
+          <img class="icon" src="~@/assets/icons/plus.svg" alt="" />
           <span>新建</span>
         </div>
         <div class="btn" @click="openWorkbenchPage">
-          <img class="icon" src="~@/assets/icons/folder.svg" alt="" srcset="">
+          <img class="icon" src="~@/assets/icons/folder.svg" alt="" />
           <span>打开</span>
         </div>
       </div>

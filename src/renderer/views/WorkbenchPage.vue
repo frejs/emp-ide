@@ -7,14 +7,8 @@
       <div class="ide-layout-main" :style="{
         left: `${ ideLayoutMainLeftParam }px`
       }">
-        <multipanel layout="vertical" class="ide-layout-panel-editor">
-          <sidebar-view></sidebar-view>
-          <multipanel-resizer></multipanel-resizer>
-          <editor-view></editor-view>
-        </multipanel>
-        <div class="ide-layout-panel-devtools">
-          <devtools-view></devtools-view>
-        </div>
+        <editor-view class="ide-layout-panel-editor"></editor-view>
+        <devtools-view class="ide-layout-panel-devtools"></devtools-view>
       </div>
     </multipanel>
   </div>
@@ -24,7 +18,6 @@
 import { Multipanel, MultipanelResizer } from '@/components/multipanel';
 import HeaderbarView from './parts/HeaderbarView';
 import SimulatorView from './parts/SimulatorView';
-import SidebarView from './parts/SidebarView';
 import EditorView from './parts/EditorView';
 import DevtoolsView from './parts/DevToolsView';
 import { connectSimulatorDevTools } from '../utils/devtools';
@@ -44,7 +37,6 @@ export default {
     MultipanelResizer,
     HeaderbarView,
     SimulatorView,
-    SidebarView,
     EditorView,
     DevtoolsView
   },

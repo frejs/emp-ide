@@ -3,12 +3,20 @@
     <div class="user-info">
       <img class="avatar" src="https://zhaomenghuan.js.org/avatar.png" alt />
     </div>
-    <div class="action-item-list">
-      <div class="action-item" v-for="(action) in actionList" :key="action.id">
-        <div class="icon">
-          <img :src="action.icon" />
+    <div class="listview">
+      <div class="list-item" :class="{ active: layout.isShow }" v-for="(layout) in layoutList" :key="layout.id" @click="toogleLayoutPanel(layout)">
+        <div class="btn">
+          <img class="icon" :src="layout.isShow ? layout.activeIcon : layout.icon" alt="" />
         </div>
-        <h5>{{action.label}}</h5>
+        <span class="label">{{layout.label}}</span>
+      </div>
+    </div>
+    <div class="listview">
+      <div class="list-item" v-for="(action) in actionList" :key="action.id">
+        <div class="btn">
+          <img class="icon" :src="action.icon" alt="" />
+        </div>
+        <span class="label">{{action.label}}</span>
       </div>
     </div>
   </div>
@@ -18,12 +26,30 @@
 export default {
   data() {
     return {
-      actionList: [
+      layoutList: [
         {
           id: 'simulator',
           label: '模拟器',
-          icon: require('@/assets/icons/simulator.svg')
+          icon: require('@/assets/icons/simulator.svg'),
+          activeIcon: require('@/assets/icons/simulator-active.svg'),
+          isShow: true
         },
+        {
+          id: 'editor',
+          label: '编辑器',
+          icon: require('@/assets/icons/editor.svg'),
+          activeIcon: require('@/assets/icons/editor-active.svg'),
+          isShow: true
+        },
+        {
+          id: 'devtools',
+          label: '调试器',
+          icon: require('@/assets/icons/devtools.svg'),
+          activeIcon: require('@/assets/icons/devtools-active.svg'),
+          isShow: true
+        }
+      ],
+      actionList: [
         {
           id: 'preview',
           label: '预览',
@@ -31,6 +57,11 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    toogleLayoutPanel(item) {
+      item.isShow = !item.isShow;
+    }
   }
 };
 </script>
@@ -50,32 +81,34 @@ export default {
       display: inline-block;
       width: 40px;
       height: 40px;
-      margin: 15px;
+      margin: 20px;
     }
   }
-  .action-item-list {
+  .listview {
     display: flex;
-    height: 60px;
-    margin: 5px 15px;
-    .action-item {
-      flex: 1;
+    height: 50px;
+    margin: 10px;
+    .list-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       width: 60px;
-      height: 60px;
+      text-align: center;
       cursor: pointer;
-      .icon {
+      user-select: none;
+      .btn {
         width: 40px;
-        margin: 10px auto 5px;
+        margin: 5px auto;
         padding: 5px;
         background-color: #fff;
         border-radius: 5px;
-        img {
+        .icon {
           display: block;
-          width: 15px;
           height: 15px;
           margin: 0 auto;
         }
       }
-      h5 {
+      .label {
         margin: 0;
         padding: 0;
         font-size: 12px;
@@ -83,6 +116,11 @@ export default {
         line-height: 15px;
         text-align: center;
         color: #fff;
+      }
+      &.active {
+        .btn {
+          background-color: #38f;
+        }
       }
     }
   }

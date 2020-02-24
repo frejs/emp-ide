@@ -13,12 +13,6 @@
         <button onclick="setSelectedElement()">选中元素</button>
     </div>
     <script src="./js/panels.js"></script>
-    <script>
-        function setSelectedElement() {
-            chrome.devtools.inspectedWindow.eval("alert('1')", function (result, isException) { });
-            // chrome.devtools.inspectedWindow.eval("inspect(document.images[0])", function (result, isException) { });
-        }
-    </script>
 </body>
 
 </html>
