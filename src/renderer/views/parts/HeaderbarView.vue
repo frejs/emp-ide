@@ -54,6 +54,11 @@ export default {
           id: 'preview',
           label: '预览',
           icon: require('@/assets/icons/preview.svg')
+        },
+        {
+          id: 'remote-debug',
+          label: '远程调试',
+          icon: require('@/assets/icons/remote-debug.svg')
         }
       ]
     };

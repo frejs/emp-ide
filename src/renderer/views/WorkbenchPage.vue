@@ -7,7 +7,7 @@
       <div class="ide-layout-main" :style="{
         left: `${ ideLayoutMainLeftParam }px`
       }">
-        <editor-view class="ide-layout-panel-editor"></editor-view>
+        <!-- <editor-view class="ide-layout-panel-editor"></editor-view> -->
         <devtools-view class="ide-layout-panel-devtools"></devtools-view>
       </div>
     </multipanel>
@@ -18,7 +18,7 @@
 import { Multipanel, MultipanelResizer } from '@/components/multipanel';
 import HeaderbarView from './parts/HeaderbarView';
 import SimulatorView from './parts/SimulatorView';
-import EditorView from './parts/EditorView';
+// import EditorView from './parts/EditorView';
 import DevtoolsView from './parts/DevToolsView';
 import { connectSimulatorDevTools } from '../utils/devtools';
 
@@ -37,7 +37,7 @@ export default {
     MultipanelResizer,
     HeaderbarView,
     SimulatorView,
-    EditorView,
+    // EditorView,
     DevtoolsView
   },
   mounted() {
@@ -83,18 +83,19 @@ export default {
       bottom: 0;
       right: 0;
     }
-    .ide-layout-panel-editor {
-      position: absolute;
-      top: 0;
-      bottom: 300px;
-      width: 100%;
-    }
+    // .ide-layout-panel-editor {
+    //   position: absolute;
+    //   top: 0;
+    //   bottom: 300px;
+    //   width: 100%;
+    // }
     .ide-layout-panel-devtools {
       position: absolute;
       left: 0;
       right: 0;
+      top: 0;
       bottom: 0;
-      height: 300px;
+      // height: 300px;
     }
   }
 }

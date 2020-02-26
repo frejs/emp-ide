@@ -14,8 +14,8 @@ export default {
   name: 'editor-view',
   data() {
     return {
-      code: `//index.js
-//获取应用实例
+      code: `// index.js
+// 获取应用实例
 const app = getApp()
 
 Page({
@@ -24,7 +24,6 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: false
-    // canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   //事件处理函数
   bindViewTap: function() {

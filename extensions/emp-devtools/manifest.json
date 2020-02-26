@@ -1,6 +1,6 @@
 {
     "manifest_version": 2,
-    "name": "dev-ext",
+    "name": "emp-devtools",
     "version": "0.0.1",
     "description": "Chrome 开发者工具拓展",
     "icons": {
@@ -9,20 +9,16 @@
         "64": "icons/icon_64.png",
         "128": "icons/icon_128.png"
     },
-    "devtools_page": "devtools.html",
+    "devtools_page": "devtools-background.html",
     "background": {
         "scripts": [
-            "js/background.js"
+            "build/background.js"
         ]
     },
-    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
     "permissions": [
         "http://*/*",
         "https://*/*",
-        "background",
-        "storage",
-        "tabs",
-        "webRequest",
-        "contextMenus"
+        "file:///*",
+        "storage"
     ]
 }

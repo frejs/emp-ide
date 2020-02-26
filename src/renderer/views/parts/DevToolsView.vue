@@ -1,7 +1,12 @@
 <template>
   <div class="devtools-wrapper" ref="devtoolsWrapper">
     <div class="tabbar">调试器</div>
-    <webview class="devtools" id="devtools" disablewebsecurity="true"></webview>
+    <webview class="devtools" 
+      id="devtools"
+      disablewebsecurity="true"
+      enableremotemodule="true"
+      plugins>
+    </webview>
   </div>
 </template>
 
@@ -13,7 +18,7 @@ export default {
 
 <style lang="less">
 .devtools-wrapper {
-  height: 300px;
+  height: 100%;
   .tabbar {
     height: 30px;
     padding-left: 5px;
@@ -24,7 +29,11 @@ export default {
   }
   .devtools {
     width: 100%;
-    height: 270px;
+    position: absolute;
+    top: 30px;
+    bottom: 0;
+    left: 0;
+    right: 0;
   }
 }
 </style>

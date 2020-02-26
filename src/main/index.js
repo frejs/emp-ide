@@ -2,7 +2,7 @@
 
 import { app, BrowserWindow, ipcMain } from 'electron';
 const path = require('path');
-const getPort = require('get-port');
+// const getPort = require('get-port');
 
 /**
  * Set `__static` path to static files in production
@@ -28,7 +28,9 @@ function createWindow () {
     resizable: false,
     titleBarStyle: 'hidden',
     webPreferences: {
-      webSecurity: false
+      webSecurity: false,
+      nodeIntegration: true,
+      webviewTag: true
     }
   });
 
@@ -39,12 +41,13 @@ function createWindow () {
   });
 
   // 添加 Chrome 拓展
-  BrowserWindow.addExtension(path.join(process.cwd(), 'extensions/dev-ext'));
+  BrowserWindow.addExtension(path.join(process.cwd(), 'extensions/emp-devtools'));
 }
 
 (async () => {
   // 远程调试
-  const port = await getPort();
+  // const port = await getPort();
+  const port = 9222;
   app.commandLine.appendSwitch('remote-debugging-port', `${port}`);
   process.env.EMP_REMOTE_DEBUGGING_PORT = port;
   // 关闭安全警告
