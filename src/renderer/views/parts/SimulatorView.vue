@@ -26,9 +26,9 @@
       <webview
         id="simulator"
         class="webview"
-        src="http://localhost:8001"
+        src="https://zhaomenghuan.js.org/"
         disablewebsecurity="true"
-        plugins
+        plugins="true"
         :style="{ width: `${simulatorConfig.width}px`, height: `${simulatorConfig.height}px` }"
       ></webview>
     </div>
@@ -93,11 +93,6 @@ export default {
       simulatorConfig: {},
       selectedDeviceTypeIndex: 0
     };
-  },
-  computed: {
-    proloadUrl() {
-      return 'file:///' + process.cwd() + '/src/renderer/preload-url.js';
-    }
   },
   mounted() {
     this.simulatorConfig = this.deviceTypeConfig[0];

@@ -1,14 +1,15 @@
 <template>
   <div class="wrapper">
-    <headerbar-view></headerbar-view>
+    <toolbar-view></toolbar-view>
     <multipanel layout="vertical" class="ide-layout" @paneResize="ideLayoutPaneresize">
       <simulator-view @selected="onMobileSimulatorSelected"></simulator-view>
       <multipanel-resizer></multipanel-resizer>
       <div class="ide-layout-main" :style="{
         left: `${ ideLayoutMainLeftParam }px`
       }">
-        <!-- <editor-view class="ide-layout-panel-editor"></editor-view> -->
-        <devtools-view class="ide-layout-panel-devtools"></devtools-view>
+        <div class="ide-layout-panel-devtools">
+          <div class="tabbar">调试器</div>
+        </div>
       </div>
     </multipanel>
   </div>
@@ -16,11 +17,9 @@
 
 <script>
 import { Multipanel, MultipanelResizer } from '@/components/multipanel';
-import HeaderbarView from './parts/HeaderbarView';
+import ToolbarView from './parts/ToolbarView';
 import SimulatorView from './parts/SimulatorView';
-// import EditorView from './parts/EditorView';
-import DevtoolsView from './parts/DevToolsView';
-import { connectSimulatorDevTools } from '../utils/devtools';
+const ipcRenderer = require('electron').ipcRenderer;
 
 export default {
   name: 'workbench-page',
@@ -35,15 +34,16 @@ export default {
   components: {
     Multipanel,
     MultipanelResizer,
-    HeaderbarView,
-    SimulatorView,
-    // EditorView,
-    DevtoolsView
+    ToolbarView,
+    SimulatorView
   },
   mounted() {
     const simulatorView = document.getElementById('simulator');
-    const devtoolsView = document.getElementById('devtools');
-    connectSimulatorDevTools(simulatorView, devtoolsView);
+    simulatorView.addEventListener('dom-ready', () => {
+      ipcRenderer.send('initialized', {
+        url: simulatorView.src
+      });
+    });
   },
   computed: {
     ideLayoutMainLeftParam() {
@@ -83,19 +83,20 @@ export default {
       bottom: 0;
       right: 0;
     }
-    // .ide-layout-panel-editor {
-    //   position: absolute;
-    //   top: 0;
-    //   bottom: 300px;
-    //   width: 100%;
-    // }
     .ide-layout-panel-devtools {
       position: absolute;
       left: 0;
       right: 0;
       top: 0;
       bottom: 0;
-      // height: 300px;
+      .tabbar {
+        height: 30px;
+        padding-left: 5px;
+        font-size: 12px;
+        line-height: 30px;
+        color: hsla(0, 0%, 100%, 0.65);
+        background-color: #30303d;
+      }
     }
   }
 }

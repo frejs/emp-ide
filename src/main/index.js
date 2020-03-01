@@ -1,8 +1,8 @@
 'use strict';
 
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { screen, app, BrowserWindow, BrowserView, ipcMain, webContents } from 'electron';
 const path = require('path');
-// const getPort = require('get-port');
+const getPort = require('get-port');
 
 /**
  * Set `__static` path to static files in production
@@ -13,41 +13,57 @@ if (process.env.NODE_ENV !== 'development') {
 }
 
 let mainWindow;
+let devtoolsView;
 const winURL = process.env.NODE_ENV === 'development'
   ? 'http://localhost:9080'
   : `file://${__dirname}/index.html`;
 
 function createWindow () {
-  /**
-   * Initial window options
-   */
+  let size = screen.getPrimaryDisplay().workAreaSize;
+  let width = size.width;
+  let height = size.height;
+
+  // Workbench Window
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 500,
+    width,
+    height,
     useContentSize: false,
-    resizable: false,
     titleBarStyle: 'hidden',
     webPreferences: {
       webSecurity: false,
       nodeIntegration: true,
-      webviewTag: true
+      webviewTag: true,
+      plugins: true
     }
   });
-
+  mainWindow.maximize();
   mainWindow.loadURL(winURL);
+
+  // Devtools View
+  devtoolsView = new BrowserView({
+    webPreferences: {
+      preload: path.join(__static, 'devtools-preload.js')
+    }
+  });
+  mainWindow.setBrowserView(devtoolsView);
+  devtoolsView.setBounds({
+    x: 330,
+    y: 100,
+    width: width - 330,
+    height: height - 100
+  });
 
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
 
   // 添加 Chrome 拓展
-  BrowserWindow.addExtension(path.join(process.cwd(), 'extensions/emp-devtools'));
+  BrowserWindow.addDevToolsExtension(path.join(process.cwd(), 'extensions/emp-devtools'));
 }
 
 (async () => {
   // 远程调试
-  // const port = await getPort();
-  const port = 9222;
+  const port = await getPort();
   app.commandLine.appendSwitch('remote-debugging-port', `${port}`);
   process.env.EMP_REMOTE_DEBUGGING_PORT = port;
   // 关闭安全警告
@@ -65,6 +81,21 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
   if (mainWindow === null) {
     createWindow();
+  }
+});
+
+ipcMain.on('initialized', (event, message) => {
+  const container = webContents.getAllWebContents().find((item) => {
+    return item.getURL().includes(message.url);
+  });
+  if (container) {
+    container.setDevToolsWebContents(devtoolsView.webContents);
+    container.debugger.attach();
+    container.openDevTools();
+    // 向 DevTools WebView 中 注入 JS 脚本
+    devtoolsView.webContents.executeJavaScript(`
+      window.initDevTools && window.initDevTools();
+    `);
   }
 });
 

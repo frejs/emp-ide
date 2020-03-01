@@ -1,5 +1,5 @@
 <template>
-  <div class="header-wrapper">
+  <div class="toobar-wrapper">
     <div class="user-info">
       <img class="avatar" src="https://zhaomenghuan.js.org/avatar.png" alt />
     </div>
@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="listview">
-      <div class="list-item" v-for="(action) in actionList" :key="action.id">
+      <div class="list-item" v-for="(action) in actionList" :key="action.id" @click="handleActionButtonClick(action.id)">
         <div class="btn">
           <img class="icon" :src="action.icon" alt="" />
         </div>
@@ -23,6 +23,9 @@
 </template>
 
 <script>
+const path = require('path');
+const BrowserWindow = require('electron').remote.BrowserWindow;
+
 export default {
   data() {
     return {
@@ -66,13 +69,32 @@ export default {
   methods: {
     toogleLayoutPanel(item) {
       item.isShow = !item.isShow;
+    },
+    handleActionButtonClick(actionId) {
+      switch (actionId) {
+        case 'remote-debug':
+          this.handleRemoteDebug();
+          break;
+        default:
+          break;
+      }
+    },
+    handleRemoteDebug() {
+      const remoteDebugPage = path.join('file://', __static, 'remote-debug.html');
+      let remoteDebugWindow = new BrowserWindow();
+      remoteDebugWindow.maximize();
+      remoteDebugWindow.loadURL(remoteDebugPage);
+      remoteDebugWindow.show();
+      remoteDebugWindow.webContents.openDevTools({
+        mode: 'right'
+      });
     }
   }
 };
 </script>
 
 <style lang="less">
-.header-wrapper {
+.toobar-wrapper {
   width: 100%;
   height: 70px;
   font-size: 30px;
